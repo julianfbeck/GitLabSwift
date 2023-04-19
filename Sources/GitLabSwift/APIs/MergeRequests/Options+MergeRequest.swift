@@ -179,6 +179,142 @@ extension APIs.MergeRequests {
         
     }
     
+    public class ProjectMROption: OutputParamsCollection {
+        @OutputParam(key: "id")
+        public var project: InputParams.Project?
+        
+        
+        /// Returns merge requests which have been approved by all the users with the given id.
+        @OutputParam(key: "approved_by_ids")
+        public var approvedByIds: [Int]?
+        
+        /// Returns merge requests which have specified all the users with the given id as individual approvers.
+        @OutputParam(key: "approver_ids")
+        public var approverIds: [Int]?
+        
+        /// Returns merge requests assigned to the given user id.
+        /// - `None` returns unassigned merge requests.
+        /// - `Any` returns merge requests with an assignee.
+        @OutputParam(key: "assignee_id")
+        public var assigneeId: Int?
+        
+        /// Returns merge requests created by the given user id.
+        @OutputParam(key: "author_id")
+        public var authorId: Int?
+        
+        /// Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
+        @OutputParam(key: "author_username")
+        public var authorUsername: String?
+        
+        /// Returns merge requests created on or after the given time.
+        @OutputParam(key: "created_after")
+        public var createdAfter: Date?
+        
+        /// Returns merge requests created on or before the given time.
+        @OutputParam(key: "created_before")
+        public var createdBefore: Date?
+        
+        /// Returns merge requests deployed after the given date/time.
+        @OutputParam(key: "deployed_after")
+        public var deployedAfter: Date?
+        
+        /// Returns merge requests deployed before the given date/time.
+        @OutputParam(key: "deployed_before")
+        public var deployedBefore: Date?
+        
+        /// Returns merge requests deployed to the given environment.
+        @OutputParam(key: "environment")
+        public var environment: String?
+        
+        /// Modify the scope of the search attribute.
+        @OutputParam(key: "in")
+        public var `in`: InputParams.SearchInScope?
+        
+        /// Returns merge requests matching a comma-separated list of labels.
+        @OutputParam(key: "labels")
+        public var labels: InputParams.LabelsSearch?
+        
+        /// Returns merge requests for a specific milestone.
+        @OutputParam(key: "milestone")
+        public var milestoneId: InputParams.MilestoneIDSearch?
+        
+        /// Returns merge requests reacted by the authenticated user by the given emoji.
+        @OutputParam(key: "my_reaction_emoji")
+        public var myReactionEmoji: InputParams.EmojiSearch?
+        
+        //@OutputParam(key: "not")
+        //public var `not`: String?
+        
+        /// Returns requests ordered by value.
+        @OutputParam(key: "order_by")
+        public var orderBy: InputParams.MilestoneOrder?
+        
+        /// Returns merge requests which have the user as a reviewer with the given user id.
+        @OutputParam(key: "reviewer_id")
+        public var reviewerId: Int?
+        
+        /// Returns merge requests which have the user as a reviewer with the given username.
+        @OutputParam(key: "reviewer_username")
+        public var reviewerUsername: Int?
+        
+        /// Returns merge requests for the given scope.
+        @OutputParam(key: "scope")
+        public var scope: InputParams.MilestoneScope?
+       
+        /// Search merge requests against their title and description.
+        @OutputParam(key: "search")
+        public var search: String?
+        
+        /// Returns requests sorted in asc or desc order.
+        @OutputParam(key: "sort")
+        public var sort: InputParams.Sort?
+        
+        /// Returns merge requests with the given source branch.
+        @OutputParam(key: "source_branch")
+        public var sourceBranch: String?
+        
+        /// Returns all merge requests or just those that are opened, closed, locked, or merged.
+        @OutputParam(key: "state")
+        public var state: InputParams.MilestoneStateList?
+
+        /// Returns merge requests with the given target branch.
+        @OutputParam(key: "target_branch")
+        public var targetBranch: String?
+       
+        /// Returns merge requests updated on or after the given time.
+        @OutputParam(key: "updated_after")
+        public var updatedAfter: Date?
+        
+        /// Returns merge requests updated on or before the given time
+        @OutputParam(key: "updated_before")
+        public var updatedBefore: Date?
+        
+        /// If simple, returns the iid, URL, title, description, and basic state of merge request.
+        @OutputParam(key: "view")
+        public var view: String?
+        
+        /// If true, response returns more details for each label
+        /// in labels field: :name, :color, :description, :description_html, :text_color.
+        @OutputParam(key: "with_labels_details")
+        public var withLabelsDetails: Bool?
+        
+        /// If true, this projection requests (but does not guarantee)
+        /// that the merge_status field be recalculated asynchronously.
+        @OutputParam(key: "with_merge_status_recheck")
+        public var withMergeStatusRecheck: Bool?
+        
+        /// Filter merge requests against their wip status
+        @OutputParam(key: "wip")
+        public var wip: InputParams.MilestoneWip?
+        
+        public init(project: InputParams.Project,
+                    _ configure: ((ProjectMROption) -> Void)?) {
+            super.init()
+            self.project = project
+            configure?(self)
+        }
+    }
+    
     public class MergeMROptions: OutputParamsCollection {
         
         /// The ID or URL-encoded path of the project owned by the authenticated user.
